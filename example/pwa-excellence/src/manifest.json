@@ -1,7 +1,7 @@
 {
   "name": "Catstagram",
   "short_name": "Catstagram",
-  "start_url": "index.html",
+  "start_url": "/",
   "display": "standalone",
   "orientation": "portrait",
   "icons": [
@@ -46,6 +46,6 @@
       "type": "image/png"
     }
   ],
-  "background_color": "#4e8ef7",
-  "theme_color": "#4e8ef7"
+  "background_color": "#888888",
+  "theme_color": "#444444"
 }

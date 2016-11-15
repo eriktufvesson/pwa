@@ -21,7 +21,6 @@ export class HomePage {
     this.catService.getCats()
       .subscribe(cats => {
         this.cats = cats;
-        console.log(cats);
       });
   }
 
@@ -33,4 +32,24 @@ export class HomePage {
     cat.url = '/assets/imgs/cat-default.jpg';
   }
 
+  doRefresh(refresher) {
+    this.catService.getCats()
+      .subscribe(cats => {
+        this.cats = cats;
+        refresher.complete();
+      });
+  }
+
+  doInfinite(infiniteScroll) {
+    console.log('Begin async operation');
+
+    this.catService.getCats()
+      .subscribe(cats => {
+        this.cats = [...cats];
+        
+        console.log('Async operation has ended');
+        infiniteScroll.complete();
+      });
+
+  }
 }

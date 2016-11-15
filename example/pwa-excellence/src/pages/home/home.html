@@ -7,12 +7,16 @@
 </ion-header>
 
 <ion-content>
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
   <ion-card *ngFor="let cat of cats | onlyvisible">
     <ion-item>
       <ion-avatar item-left>
         <img [src]="cat.url" alt="Avatar" (error)="setDefaultImg(cat)">
       </ion-avatar>
       <p class="user"><strong>catster</strong></p>
+      <ion-icon name="more" item-right color="grey"></ion-icon>
     </ion-item>
     <img [src]="cat.url" alt="Cat" (error)="setDefaultImg(cat)" />
     <ion-item>
@@ -27,10 +31,17 @@
       </button>
     </ion-item>
     <ion-card-content>
+      <div class="likes">
+        <ion-icon name="heart" small></ion-icon>
+        <span><strong>misskitty13</strong> and 25 others</span>
+      </div>
       <p>
         <strong>catster</strong> <a href="#">#catalicious</a> I cry and cry and cry unless you pet me, and then maybe i cry just for fun Gate keepers of hell or find something else more interesting and sometimes switches in french and say "miaou" just because well why not. 
       </p>
       <p class="timestamp">10 minutes ago</p>
     </ion-card-content>
   </ion-card>
+  <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+   <ion-infinite-scroll-content></ion-infinite-scroll-content>
+ </ion-infinite-scroll>
 </ion-content>

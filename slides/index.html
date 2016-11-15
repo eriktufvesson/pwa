@@ -37,15 +37,15 @@
 					</blockquote>
 				</section>
 				<section>
-					<h3>3 karaktäristiska egenskaper för en PWA</h3>
+					<h3>3 main characteritstics for a PWA</h3>
 					<ul>
-						<li class="fragment">
+						<li class="fragmentx">
 							Reliable
 						</li>
-						<li class="fragment">
+						<li class="fragmentx">
 							Fast
 						</li>
-						<li class="fragment">
+						<li class="fragmentx">
 							Engaging
 						</li>
 					</ul>
@@ -63,6 +63,7 @@
 					<ul>
 						<li>Quick boot</li>
 						<li>App Shell</li>
+						<li>Cached content</li>
 					</ul>
 				</section>
 				<section>
@@ -75,14 +76,70 @@
 				</section>
 				<section>
 					<h2>Service Workers</h2>
-					<p>Ett skript (js) som körs i bakgrunden, parallellt med applikationen.</p>
-					<ul class="fragment">
+					<p>A javascript that runs in the background, parallel to the application.</p>
+					<ul class="fragmentx">
 						<li>Content pre-caching</li>
 						<li>Push Notifications</li>
 					</ul>
 				</section>
 				<section>
+					<h2>Service Worker event listeners</h2>
+					<ul>
+						<li>install</li>
+						<li>activate</li>
+						<li>fetch</li>
+						<li>push</li>
+						<li>message</li>
+						<li>sync</li>
+					</ul>
+				</section>
+				<section>
+					<h2>Service Worker example</h2>
+					<pre><code data-trim data-noescape>
+var CACHE_VERSION = 'app-v1';
+var CACHE_FILES = [
+    '/',
+    'images/background.jpeg',
+    'js/app.js',
+    'css/styles.css',
+    'https://fonts.googleapis.com/css?family=Roboto:100'
+];
+self.addEventListener('install', function (event) {
+    event.waitUntil(
+        caches.open(CACHE_VERSION)
+            .then(function (cache) {
+                console.log('Opened cache');
+                return cache.addAll(CACHE_FILES);
+            })
+    );
+});
+					</code></pre>
+				</section>
+				<section>
 					<h2>App Manifest</h2>
+					<ul>
+						<li>Metadata about the application
+							<ul>
+								<li>Name</li>
+								<li>Icons</li>
+								<li>Splash screen</li>
+								<li>Colors</li>
+								<li>...</li>
+							</ul>
+						</li>
+						<li>Makes the app "installable" (Add to Home screen)</li>
+					</ul>
+				</section>
+				<section>
+					<h1>Demo time!</h1>
+				</section>
+				<section>
+					<img src="imgs/excellence-ahead.png" alt="Excellence Ahead" style="height: 400px">
+				</section>
+				<section>
+					<a href="https://catstagram-dfa91.firebaseapp.com/" target="_blank">
+						<img src="imgs/demo-screenshot.png" alt="Catstagram PWA Demo" style="height: 500px">
+					</a>
 				</section>
 			</div>
 			<div class="footer">
