@@ -22,6 +22,7 @@ export class CatService {
         let rawData = res.json();
         let cats = new Array<Cat>();
         rawData.forEach(cat => {
+          cat.url = cat.url.replace('http://', 'https://');
           cats.push(new Cat(cat.id, cat.url, cat.source_url));
         });
         return cats;

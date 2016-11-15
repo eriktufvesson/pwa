@@ -8,6 +8,7 @@ const urlsToCache = [
     '/index.html',
     '/manifest.json',
     '/build/main.js',
+    '/build/polyfills.js',
     '/build/main.css',
     '/assets/fonts/Cookie-Regular.ttf',
     '/assets/fonts/ionicons.eot',
@@ -69,10 +70,10 @@ self.addEventListener('fetch', (event) => {
       return cache.match(event.request).then((response) => {
         
         if (response && inAppShellCache(event.request.url)) {
-        //   // If there is an entry in the cache for event.request, then response will be defined
-        //   // and we can just return it.
+          // If there is an entry in the cache for event.request, then response will be defined
+          // and we can just return it.
 
-        //   return response;
+          return response;
         }
 
         // Otherwise, if there is no entry in the cache for event.request, response will be
@@ -107,7 +108,7 @@ self.addEventListener('fetch', (event) => {
         // It will return a normal response object that has the appropriate error code set.
         console.error('Read-through caching failed:', error);
         // sendMessage({body: 'App is now in Offline Mode'});
-        // throw error;
+        throw error;
         // return response;
       });
     })
@@ -128,13 +129,25 @@ self.addEventListener('fetch', (event) => {
 // });
 
 function inAppShellCache(url) {
-  let matches = urlsToCache.map(u => {
+  var found = false;
+  urlsToCache.forEach(function(u) {
     u = u === '/index.html' ? '/' : u;
-    if (url.endWith(u) >= 0) {
-      return true;
+    if (url.endsWith(u)) {
+      console.log('match found', url, u);
+      found = true;
     }
-  });
-  return false;
+  }, this);
+  // let matches = urlsToCache.map(u => {
+  //   u = u === '/index.html' ? '/' : u;
+  //   if (url.endsWith(u)) {
+  //     console.log('match found', url, u);
+  //     found = true;
+  //   }
+  // });
+  if (!found) {
+    console.log('no match for', url);
+  }
+  return found;
 }
 
 function sendMessage(message) {
